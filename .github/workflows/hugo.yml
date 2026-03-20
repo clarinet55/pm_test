@@ -2,22 +2,33 @@ name: Deploy Hugo site to Pages
 on:
   push:
     branches: ["main"]
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # 警告にある通り、Node.js 24を明示的に使用するように設定
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Checkout
+        # v4はNode.js 20/24両対応ですが、今後のアップデートに備えます
         uses: actions/checkout@v4
+        
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
+        # v3から最新のv9系（または最新安定版）へ更新を検討します
+        # peaceiris版は更新が早いため、現時点での推奨バージョンを指定
+        uses: peaceiris/actions-hugo@v9
         with:
           hugo-version: 'latest'
+          
       - name: Build
         run: hugo --minify
+        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
+
   deploy:
     needs: build
     permissions:
