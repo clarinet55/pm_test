@@ -1,0 +1,4 @@
+baseURL = 'https://clarinet55.github.io/pm_test/'
+languageCode = 'ja-jp'
+title = 'プロジェクト報告書'
+theme = [] # 今回はテーマを使わず自作します
