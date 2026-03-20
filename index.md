@@ -18,16 +18,16 @@ title: プロジェクト報告一覧
   <tbody>
     {% for report in site.data.reports %}
     <tr>
-      <td style="border: 1px solid #ddd; padding: 8px;">{{ report.date }}</td>
+      <td style="border: 1px solid #ddd; padding: 8px; white-space: nowrap;">{{ report.date }}</td>
       <td style="border: 1px solid #ddd; padding: 8px;">{{ report.type }}</td>
       <td style="border: 1px solid #ddd; padding: 8px;">{{ report.title }}</td>
       <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
         {% if report.status == "順調" %}
           <span style="color: green; font-weight: bold;">{{ report.status }}</span>
-        {% elif report.status == "一部遅延" %}
+        {% elsif report.status == "一部遅延" %}
           <span style="color: orange; font-weight: bold;">{{ report.status }}</span>
         {% else %}
-          {{ report.status }}
+          <span style="color: red; font-weight: bold;">{{ report.status }}</span>
         {% endif %}
       </td>
       <td style="border: 1px solid #ddd; padding: 8px;">{{ report.summary }}</td>
