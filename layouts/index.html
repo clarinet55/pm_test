@@ -1,1 +1,40 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ .Title }}</title>
+    <style>
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-family: sans-serif; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .status-ok { color: green; font-weight: bold; }
+        .status-warn { color: orange; font-weight: bold; }
+        .status-crit { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>{{ .Title }}</h1>
+    <table>
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th>日付</th><th>種別</th><th>タイトル</th><th>ステータス</th><th>概要</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ range .Site.Data.reports }}
+            <tr>
+                <td>{{ .date }}</td>
+                <td>{{ .type }}</td>
+                <td>{{ .title }}</td>
+                <td style="text-align: center;">
+                    {{ if eq .status "順調" }}<span class="status-ok">{{ .status }}</span>
+                    {{ else if eq .status "一部遅延" }}<span class="status-warn">{{ .status }}</span>
+                    {{ else }}<span class="status-crit">{{ .status }}</span>
+                    {{ end }}
+                </td>
+                <td>{{ .summary }}</td>
+            </tr>
+            {{ end }}
+        </tbody>
+    </table>
+</body>
+</html>
