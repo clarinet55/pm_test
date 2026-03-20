@@ -1,28 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
+    <meta charset="UTF-8">
     <title>{{ .Title }}</title>
     <style>
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-family: sans-serif; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-        .status-ok { color: green; font-weight: bold; }
-        .status-warn { color: orange; font-weight: bold; }
-        .status-crit { color: red; font-weight: bold; }
+        /* 全体のレイアウト調整 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #24292e;
+        }
+        /* 見出しの装飾（GitHub風） */
+        h1 {
+            padding-bottom: 0.3em;
+            font-size: 2em;
+            border-bottom: 1px solid #eaecef;
+            margin-bottom: 24px;
+        }
+        /* テーブルの装飾 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #dfe2e5;
+        }
+        th {
+            background-color: #f6f8fa;
+            font-weight: 600;
+        }
+        tr:nth-child(even) { background-color: #fafbfc; }
+        /* ステータスの色分け */
+        .status-ok { color: #28a745; font-weight: bold; }
+        .status-warn { color: #f66a0a; font-weight: bold; }
+        .status-crit { color: #d73a49; font-weight: bold; }
     </style>
 </head>
 <body>
     <h1>{{ .Title }}</h1>
+
     <table>
         <thead>
-            <tr style="background-color: #f2f2f2;">
+            <tr>
                 <th>日付</th><th>種別</th><th>タイトル</th><th>ステータス</th><th>概要</th>
             </tr>
         </thead>
         <tbody>
             {{ range .Site.Data.reports }}
             <tr>
-                <td>{{ .date }}</td>
+                <td style="white-space: nowrap;">{{ .date }}</td>
                 <td>{{ .type }}</td>
                 <td>{{ .title }}</td>
                 <td style="text-align: center;">
